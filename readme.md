@@ -30,7 +30,7 @@ O desenvolvimento adota boas práticas de engenharia de software e está dividid
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
+   git clone https://github.com/el-danieel/MiniLangCompiler.git
    ```
 2. Navegue até o diretório do código-fonte e compile os arquivos Java:
    ```bash
