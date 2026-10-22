@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args) {
         // Caminho do arquivo de teste
-        String filePath = "src\\teste.minilang";
+        String filePath = "teste.minilang";
 
         try (Scanner scanner = new Scanner(filePath)) {
             System.out.println("Iniciando análise sintática do arquivo: " + filePath);
