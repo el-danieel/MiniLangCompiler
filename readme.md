@@ -25,6 +25,9 @@ O desenvolvimento adota boas práticas de engenharia de software e está dividid
 * `Parser.java`: Analisador sintático descendente recursivo.
 * `Main.java`: Ponto de entrada que orquestra a leitura do arquivo e a análise.
 * `src/teste.minilang`: Arquivo de código-fonte MiniLang para testes (ex: cálculo de fatorial).
+* `tests/`: Programas válidos e inválidos usados nos testes da entrega.
+* `Docs/relatorio-entrega1.md`: Documentação da gramática, das transformações
+  LL(1), dos conjuntos FIRST/FOLLOW, do parser e da AST.
 
 ## ⚙️ Como Executar
 
@@ -32,16 +35,50 @@ O desenvolvimento adota boas práticas de engenharia de software e está dividid
    ```bash
    git clone https://github.com/el-danieel/MiniLangCompiler.git
    ```
-2. Navegue até o diretório do código-fonte e compile os arquivos Java:
-   ```bash
-   javac *.java
-   ```
-3. Execute a classe Main:
-   ```bash
-   java Main
-   ```
+2. Compile o projeto usando o Makefile:
+    ```bash
+   make
+    ```
+3. Execute o analisador com o arquivo padrão:
+    ```bash
+   make run
+    ```
 
-O programa lerá o arquivo `src/teste.minilang` e imprimirá o status da compilação e a construção da árvore no console. Em caso de erro sintático, o compilador apontará a linha e coluna exatas do problema.
+Também é possível informar o arquivo a ser analisado:
+
+```bash
+make run INPUT=tests/fatorial.minilang
+```
+
+O relatório acadêmico em PDF pode ser regenerado com:
+
+```bash
+python3 -m pip install --user -r requirements.txt
+make report
+```
+
+O script responsável pela geração está em `Docs/gerar_relatorio.py`.
+
+Sem `make`, a compilação manual pode ser feita com:
+
+```bash
+mkdir -p out
+javac -d out src/*.java
+java -cp out Main tests/fatorial.minilang
+```
+
+O programa imprime o status da análise e a construção da árvore no console. Em
+caso de erro léxico ou sintático, informa a linha e a coluna do problema e
+retorna código de saída diferente de zero.
+
+Os exemplos disponíveis são:
+
+```bash
+make run INPUT=tests/fatorial.minilang
+make run INPUT=tests/maximo.minilang
+make run INPUT=tests/soma_ate_zero.minilang
+make run INPUT=tests/erro_sintatico.minilang
+```
 
 ## 🔜 Próximos Passos (Fase 2)
 
