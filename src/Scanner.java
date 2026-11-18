@@ -41,9 +41,12 @@ public class Scanner implements AutoCloseable {
         char c = (char) currentChar;
 
         // Identificadores e Palavras-chave
-        if (Character.isLetter(c)) {
+        if (isLowercaseLetter(c)) {
             StringBuilder sb = new StringBuilder();
-            while (currentChar != -1 && Character.isLetterOrDigit((char) currentChar)) {
+            while (currentChar != -1
+                    && (isLowercaseLetter((char) currentChar)
+                    || isDigit((char) currentChar)
+                    || currentChar == '_')) {
                 sb.append((char) currentChar);
                 advance();
             }
@@ -53,9 +56,9 @@ public class Scanner implements AutoCloseable {
         }
 
         // Números
-        if (Character.isDigit(c)) {
+        if (isDigit(c)) {
             StringBuilder sb = new StringBuilder();
-            while (currentChar != -1 && Character.isDigit((char) currentChar)) {
+            while (currentChar != -1 && isDigit((char) currentChar)) {
                 sb.append((char) currentChar);
                 advance();
             }
@@ -136,6 +139,14 @@ public class Scanner implements AutoCloseable {
         } catch (IOException e) {
             currentChar = -1;
         }
+    }
+
+    private static boolean isLowercaseLetter(char c) {
+        return c >= 'a' && c <= 'z';
+    }
+
+    private static boolean isDigit(char c) {
+        return c >= '0' && c <= '9';
     }
 
     @Override

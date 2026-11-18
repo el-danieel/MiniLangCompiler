@@ -1,0 +1,9 @@
+program erro:
+begin
+    x = 10;
+    y = x +;
+    if x > 5
+        y = 20
+    end;
+    write(y)
+end.

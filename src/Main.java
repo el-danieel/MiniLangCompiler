@@ -1,7 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        // Caminho do arquivo de teste
-        String filePath = "teste.minilang";
+        String filePath = args.length > 0 ? args[0] : "src/teste.minilang";
 
         try (Scanner scanner = new Scanner(filePath)) {
             System.out.println("Iniciando análise sintática do arquivo: " + filePath);
@@ -15,7 +14,7 @@ public class Main {
 
         } catch (Exception e) {
             System.err.println("Erro durante a compilação: " + e.getMessage());
-            // e.printStackTrace(); // Descomente para ver o rastreio completo da pilha em caso de erro
+            System.exit(1);
         }
     }
 }
