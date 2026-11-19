@@ -1,0 +1,4 @@
+program divisao_zero:
+begin
+    resultado = 10 / 0
+end.

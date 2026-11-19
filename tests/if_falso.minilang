@@ -1,0 +1,12 @@
+program if_falso:
+begin
+    valor = 1;
+    if valor > 1 then
+    begin
+        write(10)
+    end
+    else
+    begin
+        write(20)
+    end
+end.

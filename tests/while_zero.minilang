@@ -1,0 +1,9 @@
+program while_zero:
+begin
+    valor = 0;
+    while valor > 0 do
+    begin
+        write(10)
+    end;
+    write(20)
+end.

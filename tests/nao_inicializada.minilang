@@ -1,0 +1,4 @@
+program nao_inicializada:
+begin
+    write(valor)
+end.

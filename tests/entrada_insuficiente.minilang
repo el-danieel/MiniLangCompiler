@@ -1,0 +1,5 @@
+program entrada_insuficiente:
+begin
+    read(primeiro);
+    read(segundo)
+end.
