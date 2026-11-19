@@ -1,19 +1,37 @@
 public class Main {
     public static void main(String[] args) {
-        String filePath = args.length > 0 ? args[0] : "src/teste.minilang";
+        String filePath = "src/teste.minilang";
+        boolean trace = false;
 
-        try (Scanner scanner = new Scanner(filePath)) {
-            System.out.println("Iniciando análise sintática do arquivo: " + filePath);
+        try {
+            boolean fileProvided = false;
+            for (String arg : args) {
+                if ("--trace".equals(arg)) {
+                    trace = true;
+                } else if (arg.startsWith("--")) {
+                    throw new IllegalArgumentException("Opção desconhecida: " + arg);
+                } else if (fileProvided) {
+                    throw new IllegalArgumentException("Informe apenas um arquivo de entrada");
+                } else {
+                    filePath = arg;
+                    fileProvided = true;
+                }
+            }
 
-            // Instancia o parser e inicia a construção da AST
-            Parser parser = new Parser(scanner);
-            AST.ProgramNode ast = parser.parse();
+            try (Scanner scanner = new Scanner(filePath)) {
+                System.err.println("Iniciando análise sintática do arquivo: " + filePath);
 
-            System.out.println("Análise sintática concluída com sucesso!");
-            System.out.println("Árvore Sintática (AST) gerada para o programa: " + ast.name);
+                Parser parser = new Parser(scanner);
+                AST.ProgramNode ast = parser.parse();
 
+                System.err.println("Análise sintática concluída com sucesso!");
+                System.err.println("Árvore Sintática (AST) gerada para o programa: " + ast.name);
+
+                Interpreter interpreter = new Interpreter(System.in, System.out, trace);
+                interpreter.execute(ast);
+            }
         } catch (Exception e) {
-            System.err.println("Erro durante a compilação: " + e.getMessage());
+            System.err.println("Erro durante compilação/execução: " + e.getMessage());
             System.exit(1);
         }
     }
